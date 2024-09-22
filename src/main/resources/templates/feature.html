@@ -9,6 +9,45 @@
 <body>
 <div layout:fragment="content">
 
+    <div class="col-md-10 container-fluid panel">
+        <div th:if="${message}">
+            <label th:text="${message}" style="color:green;"></label>
+        </div>
+
+        <div class="panel-heading">
+            <a href="#" class="btn btn-success fa fa-save nbtn pull-right">Nouveau</a>
+        </div>
+        <hr>
+        <div class="panel panel-body">
+            <table class="table table-striped table-bordered" id="dataTable3">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Date Creation</th>
+                    <th>Options</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="feature: ${features}">
+                    <td th:text="${feature.uuid}"></td>
+                    <td th:text="${feature.nameFeature}"></td>
+                    <td>
+                        <span class="text-success" th:if="${feature.activate}">Active</span>
+                        <span class="text-danger"  th:unless="${feature.activate}">Inactive</span>
+                    </td>
+                    <td th:text="${#dates.format(feature.createAt, 'yyyy-MM-dd')}"></td>
+                    <td></td>
+
+                   <!-- <td><a th:href="@{getAgence/(id=${agence.id})}" class="btn btn-primary act1 fa fa-edit">Edit</a> |
+                        <a th:href="@{deleteAgence/(id=${agence.id})}" class="btn btn-danger dbtn"><i class="fa fa-trash"></i></a></td>-->
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
 
 </div>
 

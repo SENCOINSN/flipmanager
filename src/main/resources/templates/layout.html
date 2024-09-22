@@ -4,8 +4,8 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
     <title>Feature Flip Management</title>
-    <link  href="/static/css/bootstrap.min.css"  rel="stylesheet">
-    <link  href="/static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link  href="/css/bootstrap.min.css"  rel="stylesheet">
+    <link  href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -70,6 +70,12 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
     </footer>
 
 </main>
+
+<!-- jQuery 3 -->
+<script src="/js/jquery/dist/jquery.min.js" th:src="@{/js/jquery/dist/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/jquery.dataTables.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/dataTables.bootstrap4.js}"></script>
+<script type="text/javascript" th:src="@{/js/datatable-demo.js}"></script>
 
 </body>
 </html>
