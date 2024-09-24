@@ -15,8 +15,8 @@ public class FeatureMapper {
     public static FeatureFlip featureRequestToFeature(FeatureRequest request) {
         FeatureFlip featureFlip = new FeatureFlip();
         if(request!=null){
-            featureFlip.setNameFeature(request.nameFeature());
-            featureFlip.setDescriptionFeature(request.descriptionFeature());
+            featureFlip.setNameFeature(request.getNameFeature());
+            featureFlip.setDescriptionFeature(request.getDescriptionFeature());
             return featureFlip;
         }
        return featureFlip;
