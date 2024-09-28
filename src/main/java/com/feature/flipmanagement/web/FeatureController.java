@@ -10,9 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -47,6 +45,25 @@ public class FeatureController {
     @GetMapping("/list")
     public ResponseEntity<List<FeatureDTO>> listAllFeatures() {
         return ResponseEntity.ok(featureService.listAllFeatures());
+    }
+
+    @RequestMapping(value = "/getFeature",method = RequestMethod.GET)
+    @ResponseBody
+    public FeatureDTO getFeature(String uuid) {
+        return featureService.getFeatureByUuid(uuid);
+    }
+
+
+    @RequestMapping(value = "/changeStatus",method = RequestMethod.GET)
+    public String changeStatus(@RequestParam(name="uuid")String uuid,RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("message", "Status changed successfully!");
+        featureService.changeStatus(uuid);
+        return "redirect:/feature/console";
+    }
+
+    @GetMapping("/context")
+    public String featureContext(Model model){
+        return "featureContext";
     }
 
 }

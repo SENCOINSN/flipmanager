@@ -41,8 +41,22 @@ public class FeatureImpl implements IFeatureFlip {
     @Override
     public FeatureDTO createFeature(FeatureRequest request) {
         log.info("createFeature: {}", request);
-        FeatureFlip feature = featureFlipRepository.save(FeatureMapper.featureRequestToFeature(request));
-        return FeatureMapper.featureToFeatureDTO(feature);
+        Optional<FeatureFlip> optionalFeatureFlip = featureFlipRepository.findByUuid(request.getUuid());
+        if (optionalFeatureFlip.isPresent()) {
+            FeatureFlip featureFlip = optionalFeatureFlip.get();
+            featureFlip.setNameFeature(request.getNameFeature());
+            featureFlip.setDescriptionFeature(request.getDescriptionFeature());
+           return processCreate(featureFlip);
+        }
+        else{
+            FeatureFlip feature = FeatureMapper.featureRequestToFeature(request);
+            return processCreate(feature);
+        }
+    }
+
+    private FeatureDTO processCreate(FeatureFlip featureFlip){
+        featureFlipRepository.save(featureFlip);
+        return FeatureMapper.featureToFeatureDTO(featureFlip);
     }
 
     @Override

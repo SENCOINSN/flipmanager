@@ -8,7 +8,7 @@ public class FeatureMapper {
 
     public static FeatureDTO featureToFeatureDTO(FeatureFlip feature) {
         return new FeatureDTO(
-                feature.getUuid(), feature.getNameFeature(), feature.isActivate(), feature.getCreateAt());
+                feature.getUuid(), feature.getNameFeature(), feature.isActivate(), feature.getDescriptionFeature(),feature.getCreateAt());
 
     }
 

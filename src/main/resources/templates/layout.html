@@ -6,6 +6,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
     <title>Feature Flip Management</title>
     <link  href="/css/bootstrap.min.css"  rel="stylesheet">
     <link  href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -30,18 +31,18 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <main>
     <nav class="navbar navbar-expand navbar-dark bg-dark" aria-label="Second navbar example">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Console Feature </a>
+            <a class="navbar-brand" th:href="@{/feature/console}">Console Feature </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarsExample02">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
+                    <!--<li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
+                    </li>-->
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Feature Context</a>
+                        <a class="nav-link" th:href="@{/feature/context}">Feature Context</a>
                     </li>
                 </ul>
                 <form>

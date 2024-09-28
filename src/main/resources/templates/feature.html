@@ -13,9 +13,10 @@
         <div th:if="${message}">
             <label th:text="${message}" style="color:green;"></label>
         </div>
+        <br>
 
         <div class="panel-heading">
-            <a href="#" class="btn btn-success fa fa-save nbtn pull-right">Nouveau</a>
+            <a href="#" class="btn btn-success fa fa-save nbtn pull-right"> New</a>
         </div>
         <hr>
         <div class="panel panel-body">
@@ -38,10 +39,15 @@
                         <span class="text-danger"  th:unless="${feature.activate}">Inactive</span>
                     </td>
                     <td th:text="${#dates.format(feature.createAt, 'yyyy-MM-dd')}"></td>
-                    <td></td>
 
-                   <!-- <td><a th:href="@{getAgence/(id=${agence.id})}" class="btn btn-primary act1 fa fa-edit">Edit</a> |
-                        <a th:href="@{deleteAgence/(id=${agence.id})}" class="btn btn-danger dbtn"><i class="fa fa-trash"></i></a></td>-->
+                <td>
+                    <a style="font-size: 10px;" th:href="@{getFeature(uuid=${feature.uuid})}" class="btn fa fa-edit act1">Edit</a> |
+                    <a th:href="@{changeStatus(uuid=${feature.uuid})}">
+                         <span th:if="${feature.activate}"> <i class="fa fa-toggle-off"></i></span>
+                        <span th:unless="${feature.activate}"><i class="fa fa-toggle-on"></i></span>
+
+                    </a>
+                </td>
                 </tr>
                 </tbody>
 
@@ -60,16 +66,6 @@
                             <button type="button"  class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <!--<div class="form-group">
-                                <p style="color:red" th:errors="*{nameFeature}"> </p>
-                                <label for="nameFeature" class="col-form-label">Name feature</label>
-                                <input class="form-control" id="nameFeature"  th:field="*{nameFeature}" />
-                            </div>
-                            <div class="form-group">
-                                <label for="descriptionFeature" class="col-form-label">Description :</label>
-                                <input type="text" class="form-control" id="descriptionFeature" th:field="*{descriptionFeature}" value="" />
-                            </div>-->
-
                             <div class="form-group">
                               <!--  <label for="uuid" class="col-form-label">Identifiant</label>-->
                                 <input class="form-control" id="uuid" name="uuid" value="" readonly/>
@@ -83,7 +79,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="descriptionFeature" class="col-form-label">Description :</label>
-                                <input type="text" class="form-control" id="descriptionFeature" name="descriptionFeature" value="" />
+                                <textarea type="text" class="form-control" id="descriptionFeature" name="descriptionFeature" value=""></textarea>
 
                             </div>
 
@@ -111,8 +107,11 @@
                 event.preventDefault();
                 var href = $(this).attr('href');
                 var text = $(this).text();
+                //console.log(text)
                 if (text === 'Edit') {
+                    //console.log("edit")
                     $.get(href, function(feature) {
+                        //console.log("feature ",JSON.stringify(feature))
                         $('.myForm #uuid').val(feature.uuid)
                         $('.myForm #nameFeature').val(feature.nameFeature)
                         $('.myForm #descriptionFeature').val(feature.descriptionFeature)
