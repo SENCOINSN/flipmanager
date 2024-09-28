@@ -56,8 +56,8 @@ public class FeatureController {
 
     @RequestMapping(value = "/changeStatus",method = RequestMethod.GET)
     public String changeStatus(@RequestParam(name="uuid")String uuid,RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute("message", "Status changed successfully!");
-        featureService.changeStatus(uuid);
+        boolean status = featureService.changeStatus(uuid);
+        redirectAttributes.addFlashAttribute("message", "flip is "+ (status ? "Activated !" : "Deactivated !"));
         return "redirect:/feature/console";
     }
 
