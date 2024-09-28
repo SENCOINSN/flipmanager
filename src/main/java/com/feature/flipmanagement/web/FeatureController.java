@@ -25,8 +25,6 @@ public class FeatureController {
 
     @GetMapping("/console")
     public String home(Model model) {
-        FeatureRequest FeatureRequest = new FeatureRequest();
-        //model.addAttribute("featureRequest", FeatureRequest);
         model.addAttribute("features", featureService.listAllFeatures());
         return "feature";
     }
