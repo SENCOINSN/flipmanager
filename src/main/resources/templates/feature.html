@@ -26,6 +26,7 @@
                     <th>Id</th>
                     <th>Name</th>
                     <th>Status</th>
+                    <th>Description</th>
                     <th>Date Creation</th>
                     <th>Options</th>
                 </tr>
@@ -38,10 +39,11 @@
                         <span class="text-success" th:if="${feature.activate}">Active</span>
                         <span class="text-danger"  th:unless="${feature.activate}">Inactive</span>
                     </td>
+                    <td th:text="${#strings.abbreviate(feature.descriptionFeature, 50)}"></td>
                     <td th:text="${#dates.format(feature.createAt, 'yyyy-MM-dd')}"></td>
 
                 <td>
-                    <a style="font-size: 10px;" th:href="@{getFeature(uuid=${feature.uuid})}" class="btn fa fa-edit act1">Edit</a> |
+                    <a  th:href="@{getFeature(uuid=${feature.uuid})}" class="btn fa fa-edit act1">Edit</a> |
                     <a th:href="@{changeStatus(uuid=${feature.uuid})}">
                          <span th:if="${feature.activate}"> <i class="fa fa-toggle-off"></i></span>
                         <span th:unless="${feature.activate}"><i class="fa fa-toggle-on"></i></span>
