@@ -1,9 +1,13 @@
 package com.feature.flipmanagement.service;
 
+import com.feature.flipmanagement.dto.FeatureContextDTO;
+import com.feature.flipmanagement.dto.FeatureContextRequest;
 import com.feature.flipmanagement.dto.FeatureDTO;
 import com.feature.flipmanagement.dto.FeatureRequest;
 import com.feature.flipmanagement.mapper.FeatureMapper;
+import com.feature.flipmanagement.model.FeatureContext;
 import com.feature.flipmanagement.model.FeatureFlip;
+import com.feature.flipmanagement.repository.FeatureContextRepository;
 import com.feature.flipmanagement.repository.FeatureFlipRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +23,7 @@ import java.util.Optional;
 public class FeatureImpl implements IFeatureFlip {
 
     private final FeatureFlipRepository featureFlipRepository;
+    private final FeatureContextRepository featureContextRepository;
     ;
 
     @Override
@@ -91,5 +96,37 @@ public class FeatureImpl implements IFeatureFlip {
         featureFlipRepository.save(featureFlip);
         log.info("changeStatus flip changed to  : {}", featureFlip.isActivate());
         return featureFlip.isActivate();
+    }
+
+    @Override
+    public FeatureContextDTO createFeatureContext(FeatureContextRequest request) {
+        return FeatureMapper.featureContextToFeatureContextDTO(featureContextRepository.save(
+                FeatureMapper.featureRequestToFeatureContext(request)
+        )
+        );
+    }
+
+    @Override
+    public List<FeatureContextDTO> listAllFeatureContext() {
+        return featureContextRepository.findAll()
+                .stream()
+                .map(FeatureMapper::featureContextToFeatureContextDTO)
+                .toList();
+    }
+
+    @Override
+    public FeatureContextDTO getFeatureContextByUuid(String uuid) {
+        FeatureContext featureContext= featureContextRepository.findByUuid(uuid)
+                .orElseThrow(() -> new RuntimeException("FeatureContext not found"));
+
+        return FeatureMapper.featureContextToFeatureContextDTO(featureContext);
+
+    }
+
+    @Override
+    public FeatureContextDTO getFeatureContextByFeatureName(String nameFeature) {
+       FeatureContext featureContext= featureContextRepository.findByNameFeature(nameFeature)
+                .orElseThrow(() -> new RuntimeException("FeatureContext not found"));
+        return FeatureMapper.featureContextToFeatureContextDTO(featureContext);
     }
 }

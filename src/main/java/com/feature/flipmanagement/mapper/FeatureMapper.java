@@ -1,7 +1,10 @@
 package com.feature.flipmanagement.mapper;
 
+import com.feature.flipmanagement.dto.FeatureContextDTO;
+import com.feature.flipmanagement.dto.FeatureContextRequest;
 import com.feature.flipmanagement.dto.FeatureDTO;
 import com.feature.flipmanagement.dto.FeatureRequest;
+import com.feature.flipmanagement.model.FeatureContext;
 import com.feature.flipmanagement.model.FeatureFlip;
 
 public class FeatureMapper {
@@ -21,5 +24,36 @@ public class FeatureMapper {
         }
        return featureFlip;
     }
+
+    public static FeatureContext featureRequestToFeatureContext(FeatureContextRequest request) {
+        FeatureContext featureContext = new FeatureContext();
+        if(request!=null){
+            featureContext.setNameFeature(request.getNameFeature());
+            if(request.getTargetUser()!=null){
+                featureContext.setTargetUser(request.getTargetUser());
+            }
+
+            if(request.getTargetGroup()!=null){
+                featureContext.setTargetGroup(request.getTargetGroup());
+            }
+
+            if(request.getUserGroups()!=null){
+                featureContext.setUserGroups(request.getUserGroups());
+            }
+            return featureContext;
+        }
+       return featureContext;
+    }
+
+    public static FeatureContextDTO featureContextToFeatureContextDTO(FeatureContext featureContext) {
+        return new FeatureContextDTO(featureContext.getUuid(),
+                featureContext.getNameFeature(),
+                featureContext.getTargetUser(),
+                featureContext.getTargetGroup(),
+                featureContext.getUserGroups(),
+                featureContext.getCreateAt());
+    }
+
+
 
 }

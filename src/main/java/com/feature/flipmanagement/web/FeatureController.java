@@ -1,6 +1,8 @@
 package com.feature.flipmanagement.web;
 
 import com.feature.flipmanagement.constants.ApiPath;
+import com.feature.flipmanagement.dto.FeatureContextDTO;
+import com.feature.flipmanagement.dto.FeatureContextRequest;
 import com.feature.flipmanagement.dto.FeatureDTO;
 import com.feature.flipmanagement.dto.FeatureRequest;
 import com.feature.flipmanagement.service.IFeatureFlip;
@@ -61,7 +63,31 @@ public class FeatureController {
 
     @GetMapping("/context")
     public String featureContext(Model model){
+        model.addAttribute("features", featureService.listAllFeatures());
+        model.addAttribute("featureContexts", featureService.listAllFeatureContext());
         return "featureContext";
     }
+
+    @PostMapping("/create-context")
+    public String createFeature(@Valid FeatureContextRequest featureRequest, BindingResult result,
+                                RedirectAttributes redirectAttributes) {
+        if (result.hasErrors()) {
+            return "featureContext";
+        }
+        featureService.createFeatureContext(featureRequest);
+        redirectAttributes.addFlashAttribute("message", "Feature Context created successfully!");
+        return "redirect:/feature/context";
+    }
+
+
+    @RequestMapping(value = "/getFeatureContext",method = RequestMethod.GET)
+    @ResponseBody
+    public FeatureContextDTO getFeatureContext(String uuid) {
+        return featureService.getFeatureContextByUuid(uuid);
+    }
+
+
+
+
 
 }

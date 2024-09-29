@@ -1,5 +1,7 @@
 package com.feature.flipmanagement.service;
 
+import com.feature.flipmanagement.dto.FeatureContextDTO;
+import com.feature.flipmanagement.dto.FeatureContextRequest;
 import com.feature.flipmanagement.dto.FeatureDTO;
 import com.feature.flipmanagement.dto.FeatureRequest;
 
@@ -17,6 +19,13 @@ public interface IFeatureFlip {
     void deleteFeature(String uuid);
 
     boolean changeStatus(String uuid);
+
+    FeatureContextDTO createFeatureContext(FeatureContextRequest request);
+    List<FeatureContextDTO> listAllFeatureContext();
+
+    FeatureContextDTO getFeatureContextByUuid(String uuid);
+
+    FeatureContextDTO getFeatureContextByFeatureName(String nameFeature);
 
 
 }

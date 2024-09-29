@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -21,6 +22,7 @@ public class FeatureContext {
     @ElementCollection
     @CollectionTable(name = "user_groups", joinColumns = @JoinColumn(name = "user_id"))
     private List<String> userGroups=new ArrayList<>();
+    private Date createAt=new Date();
 
 
     public FeatureContext() {

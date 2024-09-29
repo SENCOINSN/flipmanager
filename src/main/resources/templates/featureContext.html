@@ -9,7 +9,122 @@
 <body>
 
 <div layout:fragment="content">
-    <p>Feature context</p>
+
+    <div class="col-md-10 container-fluid panel">
+        <div th:if="${message}">
+            <label th:text="${message}" style="color:green;"></label>
+        </div>
+        <br>
+
+        <div class="panel-heading">
+            <a href="#" class="btn btn-success fa fa-save nbtn pull-right"> New</a>
+        </div>
+        <hr>
+        <div class="panel panel-body">
+            <table class="table table-striped table-bordered" id="dataTable3">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>User Target</th>
+                    <th>Group Target</th>
+                    <th>Date Creation</th>
+                    <th>Options</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="featureContext: ${featureContexts}">
+                    <td th:text="${featureContext.uuid}"></td>
+                    <td th:text="${featureContext.nameFeature}"></td>
+                    <td th:text="${featureContext.targetUser}"></td>
+                    <td th:text="${featureContext.targetGroup}"></td>
+                    <td th:text="${#dates.format(featureContext.createAt, 'yyyy-MM-dd')}"></td>
+
+                    <td>
+                       <a  th:href="@{getFeatureContext(uuid=${featureContext.uuid})}" class="btn fa fa-edit act1">Edit</a> |
+                    </td>
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+
+    <div class="myForm">
+        <form th:action="@{create-context}"  method="post">
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color:#4cae4c">
+                            <h5 class="modal-title" id="exampleModalLabel" style="color: white">Feature</h5>
+                            <button type="button"  class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <input class="form-control" id="uuid" name="uuid" value="" readonly/>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="nameFeature" class="col-form-label">Name Feature </label>
+                                <select class="form-control" id="nameFeature" name="nameFeature">
+                                    <option th:each="feature: ${features}" th:text="${feature.nameFeature}" th:value="${feature.nameFeature}"></option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="targetUser" class="col-form-label">User Target</label>
+                                <input type="text" class="form-control" id="targetUser" name="targetUser" value="" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="targetGroup" class="col-form-label">Group Target</label>
+                                <input type="text" class="form-control" id="targetGroup" name="targetGroup" value="" />
+                            </div>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-primary fa fa-save" value="Ajouter" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="/js/jquery/dist/jquery.min.js" th:src="@{/js/jquery/dist/jquery.min.js}"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+
+    <script>
+        $(document).ready(function(){
+            console.log("hello world")
+
+            $('.nbtn,.act1').on('click', function(event) {
+                event.preventDefault();
+                const href = $(this).attr('href');
+                const text = $(this).text();
+
+                if (text === 'Edit') {
+                    $.get(href, function(featureContext) {
+                        $('.myForm #uuid').val(featureContext.uuid)
+                        $('.myForm #nameFeature').val(featureContext.nameFeature)
+                        $('.myForm #targetUser').val(featureContext.targetUser)
+                        $('.myForm #targetGroup').val(featureContext.targetGroup)
+                    })
+                    $('.myForm #exampleModal').modal()
+                } else {
+                    $('.myForm #uuid').val('')
+                    $('.myForm #nameFeature').val('')
+                    $('.myForm #targetUser').val('')
+                    $('.myForm #targetGroup').val('')
+                    $('.myForm #exampleModal').modal()
+                }
+            });
+
+        });
+    </script>
 </div>
 
 </body>
