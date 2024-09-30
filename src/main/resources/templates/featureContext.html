@@ -82,6 +82,12 @@
                                 <input type="text" class="form-control" id="targetGroup" name="targetGroup" value="" />
                             </div>
 
+                            <div class="form-group">
+                                <label for="userGroups" class="col-form-label">User group (separate by ,) :</label>
+                                <textarea type="text" class="form-control" id="userGroups" name="userGroups" value=""></textarea>
+
+                            </div>
+
 
                         </div>
                         <div class="modal-footer">
@@ -119,6 +125,7 @@
                     $('.myForm #nameFeature').val('')
                     $('.myForm #targetUser').val('')
                     $('.myForm #targetGroup').val('')
+                    $('.myForm #userGroups').val('')
                     $('.myForm #exampleModal').modal()
                 }
             });

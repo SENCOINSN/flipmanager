@@ -88,6 +88,11 @@ public class FeatureController {
 
 
 
+    @GetMapping("all-context")
+    @ResponseBody
+    public List<FeatureContextDTO> allFeaturesContext(){
+        return featureService.listAllFeatureContext();
+    }
 
 
 }

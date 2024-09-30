@@ -37,9 +37,6 @@ public class FeatureMapper {
                 featureContext.setTargetGroup(request.getTargetGroup());
             }
 
-            if(request.getUserGroups()!=null){
-                featureContext.setUserGroups(request.getUserGroups());
-            }
             return featureContext;
         }
        return featureContext;

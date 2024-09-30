@@ -21,6 +21,6 @@ public class FeatureContextRequest {
  private String nameFeature;
  private String targetUser;
  private String targetGroup;
- private List<String> userGroups = new ArrayList<>();
+ private String userGroups;
 
 }

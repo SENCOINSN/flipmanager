@@ -13,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -100,8 +102,21 @@ public class FeatureImpl implements IFeatureFlip {
 
     @Override
     public FeatureContextDTO createFeatureContext(FeatureContextRequest request) {
+        log.info("Start creating context request --{}  ",request);
+        FeatureContext featureContext = FeatureMapper.featureRequestToFeatureContext(request);
+        List<String> groupUsers = new ArrayList<>();
+        if(request.getUserGroups() !=null){
+            String[] userIds = request.getUserGroups().split(",");
+            Arrays.stream(userIds).forEach(id-> {
+                assert false;
+                groupUsers.add(id);
+            });
+            log.info("all users ids {} ",groupUsers);
+            featureContext.getUserGroups().clear();
+            featureContext.setUserGroups(groupUsers);
+        }
         return FeatureMapper.featureContextToFeatureContextDTO(featureContextRepository.save(
-                FeatureMapper.featureRequestToFeatureContext(request)
+                featureContext
         )
         );
     }

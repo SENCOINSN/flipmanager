@@ -23,7 +23,7 @@ public class LoginController {
         if (result.hasErrors()) {
             return "login";
         }
-        if(loginRequest.getUsername().equals("admin") && loginRequest.getPassword().equals("admin")) {
+        if(loginRequest.getUsername().equals("admin") && loginRequest.getPassword().equals("pass123")) {
             return "redirect:/feature/console";
         }
         return "login";
