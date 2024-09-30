@@ -1,0 +1,34 @@
+services:
+  postgres:
+    container_name: postgres-flip-manager
+    image: postgres
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: pass123
+      PGDATA: /var/lib/postgresql/data
+      POSTGRES_DB: bd_console_flip
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - 5432:5432
+    networks:
+      - flip-bridge
+    restart: unless-stopped
+
+  flipmanager:
+    build: ./docker
+    container_name: flipmanager
+    ports:
+      - 9095:9095
+    networks:
+      - flip-bridge
+    depends_on:
+      - postgres
+
+networks:
+  flip-bridge:
+    driver: bridge
+
+volumes:
+  postgres:
+    driver: local
