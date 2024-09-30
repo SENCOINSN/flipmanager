@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link  href="/css/bootstrap.min.css"  rel="stylesheet">
+    <link  href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link href="/css/login.css" th:href="@{/css/login.css}" rel="stylesheet">
+</head>
+<body>
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+
+        <!-- Icon -->
+        <div class="fadeIn first">
+           <!-- <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />-->
+            <span>Connexion au Console Flip Management</span>
+        </div>
+
+        <!-- Login Form -->
+        <form th:action="@{/login}" th:object="${loginRequest}" method="post">
+            <input type="text" id="login" class="fadeIn second" th:field="*{username}" placeholder="login">
+            <input type="password" id="password" class="fadeIn third" th:field="*{password}" placeholder="password">
+            <input type="submit" class="fadeIn fourth" value="Log In">
+        </form>
+
+      <!--  &lt;!&ndash; Remind Passowrd &ndash;&gt;
+        <div id="formFooter">
+            <a class="underlineHover" href="#">Forgot Password?</a>
+        </div>-->
+
+    </div>
+</div>
+
+
+</body>
+</html>
