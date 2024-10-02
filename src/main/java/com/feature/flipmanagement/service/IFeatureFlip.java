@@ -27,5 +27,7 @@ public interface IFeatureFlip {
 
     FeatureContextDTO getFeatureContextByFeatureName(String nameFeature);
 
+    boolean deleteFeatureContext(String uuid);
+
 
 }

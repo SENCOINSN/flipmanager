@@ -94,5 +94,17 @@ public class FeatureController {
         return featureService.listAllFeatureContext();
     }
 
+    @GetMapping("/deleteFeature")
+    public String deleteFeature(String  uuid) {
+        featureService.deleteFeature(uuid);
+        return "redirect:/feature/console";
+    }
+
+    @GetMapping("/deleteContext")
+    public String deleteFeatureContext(String  uuid,Model model,RedirectAttributes redirectAttributes) {
+        boolean result = featureService.deleteFeatureContext(uuid);
+        redirectAttributes.addFlashAttribute("message",(result) ? "Feature Context deleted successfully!":"Can't delete Feature Context!");
+        return "redirect:/feature/context";
+    }
 
 }

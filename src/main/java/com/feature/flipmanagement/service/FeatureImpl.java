@@ -81,10 +81,13 @@ public class FeatureImpl implements IFeatureFlip {
 
     }
 
+
     @Override
     public void deleteFeature(String uuid) {
         FeatureFlip featureFlip = featureFlipRepository.findByUuid(uuid)
                 .orElseThrow(() -> new RuntimeException("Feature not found"));
+        featureContextRepository.findByNameFeature(featureFlip.getNameFeature())
+                .ifPresent(featureContextRepository::delete);
         featureFlipRepository.delete(featureFlip);
 
     }
@@ -123,6 +126,7 @@ public class FeatureImpl implements IFeatureFlip {
 
     @Override
     public List<FeatureContextDTO> listAllFeatureContext() {
+        log.info("list all feature context");
         return featureContextRepository.findAll()
                 .stream()
                 .map(FeatureMapper::featureContextToFeatureContextDTO)
@@ -131,6 +135,7 @@ public class FeatureImpl implements IFeatureFlip {
 
     @Override
     public FeatureContextDTO getFeatureContextByUuid(String uuid) {
+        log.info("getFeatureContextByUuid: with {}", uuid);
         FeatureContext featureContext= featureContextRepository.findByUuid(uuid)
                 .orElseThrow(() -> new RuntimeException("FeatureContext not found"));
 
@@ -140,8 +145,28 @@ public class FeatureImpl implements IFeatureFlip {
 
     @Override
     public FeatureContextDTO getFeatureContextByFeatureName(String nameFeature) {
+        log.info("getFeatureContextByFeatureName: with {}", nameFeature);
        FeatureContext featureContext= featureContextRepository.findByNameFeature(nameFeature)
                 .orElseThrow(() -> new RuntimeException("FeatureContext not found"));
         return FeatureMapper.featureContextToFeatureContextDTO(featureContext);
     }
+
+    @Override
+    public boolean deleteFeatureContext(String uuid) {
+        log.info("deleteFeatureContext: with {}", uuid);
+        FeatureContext featureContext = featureContextRepository.findByUuid(uuid)
+                .orElseThrow(() -> new RuntimeException("FeatureContext not found"));
+        featureContextRepository.delete(featureContext);
+        return true;
+    }
+
+
+
+   /* @Override
+    public void deleteFeatureContext(String uuid) {
+        log.info("deleteFeatureContext: with {}", uuid);
+        FeatureContext featureContext = featureContextRepository.findByUuid(uuid)
+                .orElseThrow(() -> new RuntimeException("FeatureContext not found"));
+        featureContextRepository.delete(featureContext);
+    }*/
 }
