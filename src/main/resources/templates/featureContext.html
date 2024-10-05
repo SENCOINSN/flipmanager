@@ -41,7 +41,7 @@
                     <td th:text="${#dates.format(featureContext.createAt, 'yyyy-MM-dd')}"></td>
 
                     <td>
-                       <a  th:href="@{getFeatureContext(uuid=${featureContext.uuid})}" class="btn fa fa-edit act1">Edit</a> |
+                       <a  th:href="@{getFeatureContext(uuid=${featureContext.uuid})}" class="btn act1">Edit</a> |
                        <a  th:href="@{deleteContext(uuid=${featureContext.uuid})}" class="btn  dbtn"><i class="fa fa-trash"></i></a>
                     </td>
                 </tr>

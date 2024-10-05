@@ -45,8 +45,8 @@
                 <td>
                     <a style="font-size: medium;" th:href="@{getFeature(uuid=${feature.uuid})}" class="btn act1">Edit</a> |
                     <a th:href="@{changeStatus(uuid=${feature.uuid})}">
-                         <span th:if="${feature.activate}"> <i class="fa fa-toggle-off"></i></span>
-                        <span th:unless="${feature.activate}"><i class="fa fa-toggle-on"></i></span>
+                         <span th:if="${feature.activate}"> <i class="fa fa-toggle-on"></i></span>
+                        <span th:unless="${feature.activate}"><i class="fa fa-toggle-off"></i></span>
                     </a> |
                     <a th:href="@{deleteFeature(uuid=${feature.uuid})}" class="btn  dbtn"><i style="font-size: medium;" class="fa fa-trash"></i></a>
 

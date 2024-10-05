@@ -160,13 +160,4 @@ public class FeatureImpl implements IFeatureFlip {
         return true;
     }
 
-
-
-   /* @Override
-    public void deleteFeatureContext(String uuid) {
-        log.info("deleteFeatureContext: with {}", uuid);
-        FeatureContext featureContext = featureContextRepository.findByUuid(uuid)
-                .orElseThrow(() -> new RuntimeException("FeatureContext not found"));
-        featureContextRepository.delete(featureContext);
-    }*/
 }
