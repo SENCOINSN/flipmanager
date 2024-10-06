@@ -11,15 +11,13 @@
 <div class="wrapper fadeInDown">
     <div id="formContent">
 
-        <div class="fadeIn first">
+        <!-- <div class="fadeIn first">
             <span>Connexion au Console Flip Management</span>
-        </div>
+        </div> -->
 
-        <form th:action="@{/login}" th:object="${loginRequest}" method="post">
-            <span th:errors="*{username}"></span>
-            <input type="text" id="login" class="fadeIn second" th:field="*{username}" placeholder="login"/>
-            <span th:errors="*{password}"></span>
-            <input type="password" id="password" class="fadeIn second" th:field="*{password}" placeholder="password"/>
+        <form th:action="@{/login}"  method="post">
+            <input type="text" id="username" class="fadeIn second" name="username" placeholder="login"/>
+            <input type="password" id="password" class="fadeIn second" name="password" placeholder="password"/>
             <input type="submit" class="fadeIn fourth" value="Log In">
         </form>
 
