@@ -16,6 +16,8 @@ public interface IFeatureFlip {
 
     FeatureDTO updateFeature(FeatureRequest request);
 
+    FeatureDTO getFeatureByName(String name);
+
     void deleteFeature(String uuid);
 
     boolean changeStatus(String uuid);

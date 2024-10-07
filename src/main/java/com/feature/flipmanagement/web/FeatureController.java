@@ -43,14 +43,21 @@ public class FeatureController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<FeatureDTO>> listAllFeatures() {
-        return ResponseEntity.ok(featureService.listAllFeatures());
+    @ResponseBody
+    public List<FeatureDTO> listAllFeatures() {
+        return featureService.listAllFeatures();
     }
 
     @RequestMapping(value = "/getFeature",method = RequestMethod.GET)
     @ResponseBody
     public FeatureDTO getFeature(String uuid) {
         return featureService.getFeatureByUuid(uuid);
+    }
+
+    @RequestMapping(value = "/feature-by-name",method = RequestMethod.GET)
+    @ResponseBody
+    public FeatureDTO getFeatureName(String name) {
+        return featureService.getFeatureByName(name);
     }
 
 
@@ -86,6 +93,12 @@ public class FeatureController {
         return featureService.getFeatureContextByUuid(uuid);
     }
 
+    @RequestMapping(value = "/feature-context-by-name",method = RequestMethod.GET)
+    @ResponseBody
+    public FeatureContextDTO getfeatureContextByName(String name){
+        return featureService.getFeatureContextByFeatureName(name);
+    }
+
 
 
     @GetMapping("all-context")
@@ -105,6 +118,12 @@ public class FeatureController {
         boolean result = featureService.deleteFeatureContext(uuid);
         redirectAttributes.addFlashAttribute("message",(result) ? "Feature Context deleted successfully!":"Can't delete Feature Context!");
         return "redirect:/feature/context";
+    }
+
+    @GetMapping("/connect")
+    @ResponseBody
+    public String connect() {
+        return "OK";
     }
 
    

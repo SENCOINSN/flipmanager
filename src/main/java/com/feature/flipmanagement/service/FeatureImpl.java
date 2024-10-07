@@ -38,12 +38,14 @@ public class FeatureImpl implements IFeatureFlip {
 
     @Override
     public FeatureDTO getFeatureByUuid(String uuid) {
-        return featureFlipRepository.findByUuid(uuid)
-                .isPresent()
-                ? FeatureMapper.featureToFeatureDTO(featureFlipRepository.findByUuid(uuid).get())
-                : null;
+       FeatureFlip feature = featureFlipRepository.findByUuid(uuid)
+                .orElseThrow(()-> new RuntimeException("Feature not found"));
+
+        return FeatureMapper.featureToFeatureDTO(feature);
 
     }
+
+    
 
     @Override
     public FeatureDTO createFeature(FeatureRequest request) {
@@ -158,6 +160,14 @@ public class FeatureImpl implements IFeatureFlip {
                 .orElseThrow(() -> new RuntimeException("FeatureContext not found"));
         featureContextRepository.delete(featureContext);
         return true;
+    }
+
+    @Override
+    public FeatureDTO getFeatureByName(String name) {
+        FeatureFlip feature = featureFlipRepository.findByNameFeature(name)
+        .orElseThrow(()-> new RuntimeException("Feature not found"));
+
+      return FeatureMapper.featureToFeatureDTO(feature);
     }
 
 }

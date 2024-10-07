@@ -39,7 +39,7 @@ public class SecurityConfig {
        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
            http.
            csrf(AbstractHttpConfigurer::disable)
-          . authorizeHttpRequests(request -> request.requestMatchers("/", "/css/*", "/login","/feature/**").permitAll()
+          . authorizeHttpRequests(request -> request.requestMatchers("/", "/css/*", "/login","/feature/**","/connect").permitAll()
                          .anyRequest().authenticated())
                 .formLogin(form -> form.loginPage("/login")
                          .defaultSuccessUrl("/feature/console", true)
